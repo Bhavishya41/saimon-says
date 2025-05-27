@@ -8,13 +8,24 @@ let levelNo = document.querySelector("h3");
 let highest = 0;
 let high = document.querySelector("h2");
 
-document.addEventListener("keypress", function (){
-    if(start === false){
+function startGame() {
+    if (start === false) {
         console.log("game started");
         start = true;
-        levelup();
+        setTimeout(levelup, 250); 
     }
-})
+}
+
+document.addEventListener("click", function (event) {
+    if (
+        !event.target.matches("button.red") &&
+        !event.target.matches("button.green") &&
+        !event.target.matches("button.yellow") &&
+        !event.target.matches("button.blue")
+    ) {
+        startGame();
+    }
+});
 
 function flashBtn(btn) {
     btn.classList.add("flash");
@@ -34,7 +45,12 @@ function levelup(){
     flashBtn(btn);
 }
 
-function btnPress(){
+function btnPress(event) {
+    event.stopPropagation(); 
+    if (start === false) {
+        startGame();
+        return; 
+    }
     let button = this;
     flashBtn(this);
     let colour = button.getAttribute("id");
