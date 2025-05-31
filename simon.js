@@ -70,6 +70,7 @@ function match(idx){
         level = 0;
         start = false; 
         high.innerHTML = `highest score: ${highest}`;
+        sequence=[];
     }
 }
 
